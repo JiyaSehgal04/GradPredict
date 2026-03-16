@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your GradPredict Results — 78% admission probability with detailed metric breakdown and improvement suggestions.">
+  <title>Your Outlook — GradPredict</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="results-nav">
+    <a href="index.html" class="navbar-logo">
+      <span class="logo-icon">G</span>
+      GradPredict
+    </a>
+    <div class="navbar-links">
+      <a href="results.html">Dashboard</a>
+      <a href="#">Resources</a>
+      <a href="signin.html" class="btn-nav" style="background: var(--gold);">Logout</a>
+    </div>
+  </nav>
+
+  <!-- ===== RESULTS HERO ===== -->
+  <section class="results-hero" id="results-hero">
+    <h1>Your Outlook</h1>
+    <span class="tag">Analysis complete based on your academic profile.</span>
+  </section>
+
+  <!-- ===== RESULTS MAIN ===== -->
+  <main class="results-main" id="results-main">
+
+    <!-- Probability + Why -->
+    <div class="results-top">
+      <div class="probability-card" id="probability-card">
+        <div class="probability-ring">
+          <div class="probability-ring-inner">
+            <span class="prob-number">78<span class="prob-percent">%</span></span>
+            <span class="prob-label">Probability</span>
+          </div>
+        </div>
+        <div class="risk-badge">
+          <span class="risk-dot"></span>
+          Risk Level: Low
+        </div>
+      </div>
+
+      <div class="why-card" id="why-card">
+        <h3><span class="icon">📊</span> Why This Score?</h3>
+
+        <div class="why-item">
+          <span class="why-tag">GPA</span>
+          <div>
+            <h5>Academic Excellence</h5>
+            <p>Your 3.9 GPA is significantly higher than the average applicant. This adds a +15% boost to your probability score.</p>
+          </div>
+        </div>
+
+        <div class="why-item">
+          <span class="why-tag">RES</span>
+          <div>
+            <h5>Research Impact</h5>
+            <p>3 published papers in relevant journals place you in the top 5% of research profiles for this tier of university.</p>
+          </div>
+        </div>
+
+        <div class="why-item">
+          <span class="why-tag">GRE</span>
+          <div>
+            <h5>Standardized Testing</h5>
+            <p>Your score of 320 is slightly below the target for Ivy League institutions, which limits the upper probability cap.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Cards -->
+    <div class="action-cards-row" id="action-cards">
+      <div class="action-card gold-bg">
+        <h4>Target<br>Schools</h4>
+        <p>View the list of universities where your 78% score makes you a top candidate.</p>
+        <a href="#" class="btn btn-outline btn-sm">Explore</a>
+        <div class="card-deco">
+          <svg viewBox="0 0 60 60" fill="none">
+            <rect x="5" y="5" width="50" height="50" fill="currentColor" opacity="0.3"/>
+            <rect x="15" y="15" width="30" height="30" fill="currentColor" opacity="0.3"/>
+          </svg>
+        </div>
+      </div>
+      <div class="action-card white-bg">
+        <h4>Improve<br>Score</h4>
+        <p>Re-take specific assessment sections to see how higher GRE scores affect you.</p>
+        <a href="#" class="btn btn-primary btn-sm">Retake</a>
+        <div class="card-deco">
+          <svg viewBox="0 0 60 60" fill="none">
+            <line x1="10" y1="50" x2="50" y2="10" stroke="currentColor" stroke-width="4" opacity="0.2"/>
+            <line x1="10" y1="35" x2="35" y2="10" stroke="currentColor" stroke-width="4" opacity="0.2"/>
+            <line x1="10" y1="20" x2="20" y2="10" stroke="currentColor" stroke-width="4" opacity="0.2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detailed Metric Comparison -->
+    <div class="comparison-section" id="comparison">
+      <h3>Detailed Metric Comparison</h3>
+      <div class="comparison-grid">
+        <div class="comparison-card" id="comp-gpa">
+          <div class="comp-label">GPA</div>
+          <div class="comp-value">3.9</div>
+          <div class="comp-bar">
+            <div class="comp-bar-fill" style="width: 97%;"></div>
+          </div>
+        </div>
+        <div class="comparison-card" id="comp-gre">
+          <div class="comp-label">GRE</div>
+          <div class="comp-value">320</div>
+          <div class="comp-bar">
+            <div class="comp-bar-fill" style="width: 80%;"></div>
+          </div>
+        </div>
+        <div class="comparison-card" id="comp-lor">
+          <div class="comp-label">LOR</div>
+          <div class="comp-value">4.5</div>
+          <div class="comp-bar">
+            <div class="comp-bar-fill" style="width: 90%;"></div>
+          </div>
+        </div>
+        <div class="comparison-card" id="comp-research">
+          <div class="comp-label">Research</div>
+          <div class="comp-value">3.0</div>
+          <div class="comp-bar">
+            <div class="comp-bar-fill" style="width: 60%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boost Section -->
+    <div class="boost-section" id="boost-cta">
+      <h3>Want to Boost Your Chances?</h3>
+      <p>Connect with one of our admission consultants to refine your Statement of Purpose and boost your probability to 90%+.</p>
+      <div class="boost-buttons">
+        <a href="#" class="btn btn-primary">Book Consultation</a>
+        <a href="#" class="btn btn-white">Download Report</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="results-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="navbar-logo">
+          <span class="logo-icon">G</span>
+          GradPredict
+        </div>
+        <p>Empowering students through data-driven academic forecasting.</p>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-nav-col">
+          <h5>&nbsp;</h5>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      <div class="footer-social">
+        <a href="#" aria-label="Share">↗</a>
+        <a href="#" aria-label="Email">✉</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 GRADPREDICT AI. ALL ACADEMIC RESULTS ARE ESTIMATES.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

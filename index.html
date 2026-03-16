@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AdmitPredict - Data-driven graduate admission forecasting. Estimate your acceptance probability into top-tier universities using 10+ academic metrics.">
+  <title>AdmitPredict — Predict Your Academic Future</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="main-nav">
+    <a href="index.html" class="navbar-logo">
+      <span class="logo-icon">A</span>
+      AdmitPredict
+    </a>
+    <div class="navbar-links">
+      <a href="index.html">Home</a>
+      <a href="results.html">Predict</a>
+      <a href="results.html">Dashboards</a>
+      <a href="signin.html" class="btn-nav">Login</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1>Predict Your<br><em>Academic</em> Future</h1>
+      <p>Data-driven graduate admission forecasting. Estimate your acceptance probability into top-tier universities using 10+ academic metrics.</p>
+      <div class="hero-buttons">
+        <a href="results.html" class="btn btn-primary">Get Prediction</a>
+        <a href="#process" class="btn btn-secondary">View Methodology</a>
+      </div>
+      <div class="fast-calc" id="fast-calc">
+        <div class="fast-calc-field">
+          <label for="gpa-input">Undergrad GPA</label>
+          <input type="text" id="gpa-input" placeholder="e.g. 3.85">
+        </div>
+        <div class="fast-calc-field">
+          <label for="gre-input">GRE Score</label>
+          <input type="text" id="gre-input" placeholder="e.g. 325">
+        </div>
+        <a href="results.html" class="btn btn-primary btn-sm">Fast Calc</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CORE METRICS ===== -->
+  <section class="metrics-section" id="metrics">
+    <h2 class="section-title">Core Metrics Tracked</h2>
+    <div class="section-title-underline"></div>
+
+    <div class="metrics-grid">
+      <div class="metric-card" id="metric-gpa">
+        <div class="metric-icon">G</div>
+        <h4>GPA Score</h4>
+        <p>Weighted calculation based on institutional prestige and major difficulty.</p>
+      </div>
+      <div class="metric-card" id="metric-gre">
+        <div class="metric-icon">A</div>
+        <h4>GRE/GMAT</h4>
+        <p>Standardized test benchmarking against previous year acceptance rates.</p>
+      </div>
+      <div class="metric-card" id="metric-research">
+        <div class="metric-icon">R</div>
+        <h4>Research</h4>
+        <p>Quantifying your publications, lab experience, and patent filings.</p>
+      </div>
+      <div class="metric-card" id="metric-lor">
+        <div class="metric-icon">L</div>
+        <h4>LOR Strength</h4>
+        <p>Sentiment analysis on letters of recommendation impact scores.</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Universities</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">120K</div>
+        <div class="stat-label">Data Points</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">94%</div>
+        <div class="stat-label">Accuracy</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3-STEP PROCESS ===== -->
+  <section class="process-section" id="process">
+    <h2 class="section-title">Simple Three-Step Process</h2>
+    <div class="section-title-underline" style="margin-bottom:40px;"></div>
+
+    <div class="process-steps">
+      <div class="process-step" id="step-1">
+        <span class="step-number">01</span>
+        <div class="step-content">
+          <h4>Input Academic Profile</h4>
+          <p>Upload your transcripts or manually enter scores. Our system handles both domestic and international grading scales.</p>
+        </div>
+      </div>
+      <div class="process-step" id="step-2">
+        <span class="step-number">02</span>
+        <div class="step-content">
+          <h4>Algorithm Processing</h4>
+          <p>Our neural network compares your profile against successful applicants from the last 5 admissions cycles.</p>
+        </div>
+      </div>
+      <div class="process-step" id="step-3">
+        <span class="step-number">03</span>
+        <div class="step-content">
+          <h4>Detailed Report</h4>
+          <p>Receive a comprehensive probability breakdown for your target universities with suggestions for improvement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BANNER ===== -->
+  <section class="cta-banner" id="cta-banner">
+    <div class="cta-box">
+      <h2>Your Journey Starts Here.</h2>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="main-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="navbar-logo">
+          <span class="logo-icon">A</span>
+          AdmitPredict
+        </div>
+        <p>The ultimate tool for aspiring graduate students to take the guesswork out of applications.</p>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-nav-col">
+          <h5>Platform</h5>
+          <a href="#">Predictor</a>
+          <a href="#">University List</a>
+          <a href="#">Premium Tier</a>
+          <a href="#">Case Studies</a>
+        </div>
+        <div class="footer-nav-col">
+          <h5>Resources</h5>
+          <a href="#">Help Center</a>
+          <a href="#">API Docs</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ADMITPREDICT. BUILT FOR THE AMBITIOUS.</span>
+      <span>DESIGNED WITH ❤️</span>
+    </div>
+  </footer>
+
+</body>
+</html>
