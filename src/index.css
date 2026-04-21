@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Lexend', sans-serif;
+    background-color: #f8f8f5;
+  }
+}
+
+@layer utilities {
+  .neobrutal-border { border: 4px solid #c2940a; }
+  .neobrutal-shadow { box-shadow: 8px 8px 0px 0px #c2940a; }
+  .neobrutal-shadow-black { box-shadow: 6px 6px 0px 0px #1a1a1a; }
+  .neo-border { border: 4px solid #1a1a1a; }
+  .neo-shadow { box-shadow: 6px 6px 0px 0px #1a1a1a; }
+  .neo-shadow-primary { box-shadow: 6px 6px 0px 0px #c2940a; }
+  .neo-input { border: 3px solid #1a1a1a; background-color: #fff9e6; }
+  .neo-input:focus { outline: none; border-color: #c2940a; box-shadow: 4px 4px 0px 0px #c2940a; }
+  .brutalist-shadow { box-shadow: 4px 4px 0px 0px rgba(0,0,0,1); }
+  .brutalist-shadow-primary { box-shadow: 4px 4px 0px 0px #c2940a; }
+  .border-black-thick { border: 3px solid #000; }
+  .border-black-thin { border: 2px solid #000; }
+  .neobrutal-shadow-sm { box-shadow: 4px 4px 0px 0px #000; }
+  .neobrutal-button:active { box-shadow: 0px 0px 0px 0px #000 !important; transform: translate(4px, 4px); }
+  .abstract-shape { position: absolute; z-index: -1; opacity: 0.15; background-color: #c2940a; }
+  .count-anim { animation: countUp 0.6s ease-out; }
+  .range-value { display: inline-block; min-width: 2rem; text-align: center; }
+  .chart-grid {
+    background-image: linear-gradient(#e5e7eb 1px, transparent 1px),
+      linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .print-header { display: none; }
+  .spin-slow { animation: spin 1.4s linear infinite; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media print {
+  nav, footer, .no-print { display: none !important; }
+  body { background: white !important; color: black !important; font-size: 12px; }
+  .neobrutal-shadow, .neobrutal-shadow-sm { box-shadow: none !important; }
+  main { padding: 0 !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .print-header { display: block !important; }
+  section { page-break-inside: avoid; }
+}
