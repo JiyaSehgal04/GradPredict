@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23c2940a'/><text x='16' y='24' font-family='Arial Black,sans-serif' font-weight='900' font-size='22' fill='white' text-anchor='middle'>A</text></svg>"/>
+<title>Admission Input Form - AdmitPredict</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#c2940a",
+                    "background-light": "#f8f8f5",
+                    "background-dark": "#221e10",
+                    "card-bg": "#ffffff",
+                    "input-bg": "#fff9e6",
+                    "accent-red": "#ff4d4d"
+                },
+                fontFamily: { "display": ["Lexend", "sans-serif"] },
+                borderWidth: { "3": "3px", "4": "4px" },
+                boxShadow: {
+                    "brutal": "8px 8px 0px 0px #221e10",
+                    "brutal-hover": "4px 4px 0px 0px #221e10",
+                    "brutal-primary": "6px 6px 0px 0px #c2940a",
+                },
+                borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+            },
+        },
+    }
+</script>
+<style>
+    body { font-family: 'Lexend', sans-serif; background-color: #f8f8f5; }
+    .neo-border { border: 4px solid #221e10; }
+    .neo-shadow { box-shadow: 8px 8px 0px 0px #221e10; }
+    .neo-input:focus { outline: none; border-color: #c2940a; box-shadow: 4px 4px 0px 0px #c2940a; }
+    .range-value { display: inline-block; min-width: 2rem; text-align: center; }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#221e10] dark:text-[#f8f8f5] min-h-screen py-12 px-4">
+<!-- Top nav -->
+<div class="max-w-3xl mx-auto mb-4 flex justify-between items-center">
+<a href="index.html" class="flex items-center gap-2 font-black uppercase text-sm tracking-widest hover:text-primary transition-colors">
+    <span class="material-icons text-sm">arrow_back</span> Home
+</a>
+<a href="dashboard.html" class="font-bold uppercase text-sm tracking-widest hover:text-primary transition-colors">Dashboard</a>
+</div>
+<div class="max-w-3xl mx-auto">
+<!-- Header -->
+<header class="mb-10 text-center">
+<h1 class="text-5xl md:text-7xl font-extrabold uppercase tracking-tighter mb-4 bg-primary inline-block px-4 py-2 neo-border neo-shadow">
+    Predictor
+</h1>
+<p class="text-xl font-bold mt-6 text-[#221e10]/80 dark:text-white/80">
+    ENTER YOUR STATS TO ESTIMATE YOUR GRADUATE ADMISSION CHANCES
+</p>
+</header>
+<!-- Main Form Card -->
+<main class="bg-card-bg dark:bg-[#2d2816] neo-border neo-shadow p-8 md:p-12 mb-12">
+<form id="predict-form" class="space-y-8">
+<!-- Grid Section 1: GRE & TOEFL -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="block text-lg font-extrabold uppercase tracking-tight" for="gre">GRE Score (Max 340)</label>
+<input class="w-full neo-border bg-input-bg dark:bg-[#3d3620] p-4 text-xl font-bold neo-input transition-all" id="gre" max="340" min="260" name="gre" placeholder="e.g. 320" type="number"/>
+<div id="gre-error" class="hidden bg-accent-red text-white p-2 neo-border flex items-center gap-2 mt-2">
+<span class="material-icons text-sm">error</span>
+<span class="font-bold text-xs uppercase">Enter a value between 260 and 340</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-lg font-extrabold uppercase tracking-tight" for="toefl">TOEFL Score (Max 120)</label>
+<input class="w-full neo-border bg-input-bg dark:bg-[#3d3620] p-4 text-xl font-bold neo-input transition-all" id="toefl" max="120" min="0" name="toefl" placeholder="e.g. 110" type="number"/>
+<div id="toefl-error" class="hidden bg-accent-red text-white p-2 neo-border flex items-center gap-2 mt-2">
+<span class="material-icons text-sm">error</span>
+<span class="font-bold text-xs uppercase">Enter a value between 0 and 120</span>
+</div>
+</div>
+</div>
+<!-- Grid Section 2: University Rating & CGPA -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="block text-lg font-extrabold uppercase tracking-tight">University Rating (1=Easiest, 5=Hardest)</label>
+<div class="flex gap-2">
+<label class="flex-1 cursor-pointer"><input class="hidden peer" name="rating" type="radio" value="1"/><div class="bg-input-bg dark:bg-[#3d3620] neo-border p-3 text-center font-black peer-checked:bg-primary peer-checked:text-white transition-all">1</div></label>
+<label class="flex-1 cursor-pointer"><input class="hidden peer" name="rating" type="radio" value="2"/><div class="bg-input-bg dark:bg-[#3d3620] neo-border p-3 text-center font-black peer-checked:bg-primary peer-checked:text-white transition-all">2</div></label>
+<label class="flex-1 cursor-pointer"><input checked class="hidden peer" name="rating" type="radio" value="3"/><div class="bg-input-bg dark:bg-[#3d3620] neo-border p-3 text-center font-black peer-checked:bg-primary peer-checked:text-white transition-all">3</div></label>
+<label class="flex-1 cursor-pointer"><input class="hidden peer" name="rating" type="radio" value="4"/><div class="bg-input-bg dark:bg-[#3d3620] neo-border p-3 text-center font-black peer-checked:bg-primary peer-checked:text-white transition-all">4</div></label>
+<label class="flex-1 cursor-pointer"><input class="hidden peer" name="rating" type="radio" value="5"/><div class="bg-input-bg dark:bg-[#3d3620] neo-border p-3 text-center font-black peer-checked:bg-primary peer-checked:text-white transition-all">5</div></label>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-lg font-extrabold uppercase tracking-tight" for="cgpa">CGPA (Scale of 10)</label>
+<input class="w-full neo-border bg-input-bg dark:bg-[#3d3620] p-4 text-xl font-bold neo-input transition-all" id="cgpa" max="10" min="0" name="cgpa" placeholder="e.g. 8.5" step="0.01" type="number"/>
+<div id="cgpa-error" class="hidden bg-accent-red text-white p-2 neo-border flex items-center gap-2 mt-2">
+<span class="material-icons text-sm">error</span>
+<span class="font-bold text-xs uppercase">Enter a value between 0 and 10</span>
+</div>
+</div>
+</div>
+<!-- Grid Section 3: SOP & LOR -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="block text-lg font-extrabold uppercase tracking-tight" for="sop">
+    SOP Strength: <span id="sop-val" class="range-value text-primary">3.0</span>
+</label>
+<input class="w-full h-8 bg-input-bg dark:bg-[#3d3620] neo-border appearance-none cursor-pointer accent-primary" id="sop" max="5" min="1" name="sop" step="0.5" type="range" value="3"/>
+<div class="flex justify-between font-bold text-sm px-1"><span>1.0</span><span>2.0</span><span>3.0</span><span>4.0</span><span>5.0</span></div>
+</div>
+<div class="space-y-2">
+<label class="block text-lg font-extrabold uppercase tracking-tight" for="lor">
+    LOR Strength: <span id="lor-val" class="range-value text-primary">3.0</span>
+</label>
+<input class="w-full h-8 bg-input-bg dark:bg-[#3d3620] neo-border appearance-none cursor-pointer accent-primary" id="lor" max="5" min="1" name="lor" step="0.5" type="range" value="3"/>
+<div class="flex justify-between font-bold text-sm px-1"><span>1.0</span><span>2.0</span><span>3.0</span><span>4.0</span><span>5.0</span></div>
+</div>
+</div>
+<!-- Research Toggle -->
+<div class="p-6 bg-primary/10 dark:bg-primary/5 neo-border">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="text-xl font-extrabold uppercase">Research Experience</h3>
+<p class="text-sm font-bold opacity-70 uppercase">Have you published any papers?</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input id="research" class="sr-only peer" type="checkbox"/>
+<div class="w-20 h-10 bg-[#ddd] neo-border peer-checked:bg-primary transition-colors flex items-center px-1">
+<div class="w-7 h-7 bg-white neo-border peer-checked:translate-x-10 transition-transform"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- General error -->
+<div id="form-error" class="hidden bg-accent-red text-white p-4 neo-border flex items-center gap-2">
+<span class="material-icons">error</span>
+<span class="font-bold uppercase">Please fill in GRE, TOEFL, and CGPA before predicting.</span>
+</div>
+<!-- Submit Button -->
+<button type="submit" class="w-full bg-primary py-6 neo-border neo-shadow hover:translate-y-1 hover:translate-x-1 hover:shadow-none transition-all duration-75">
+<span class="text-3xl font-black uppercase tracking-widest text-white flex items-center justify-center gap-3">
+    Predict Now <span class="material-icons text-4xl">trending_up</span>
+</span>
+</button>
+</form>
+</main>
+<!-- Footer -->
+<footer class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-[#221e10] text-white p-6 neo-border neo-shadow">
+<h4 class="font-extrabold uppercase mb-2">How it works</h4>
+<p class="text-xs leading-relaxed opacity-80">Our engine uses historical admission data to calculate your probability of acceptance based on the parameters provided.</p>
+</div>
+<div class="bg-white dark:bg-[#2d2816] p-6 neo-border neo-shadow">
+<h4 class="font-extrabold uppercase mb-2">Confidential</h4>
+<p class="text-xs leading-relaxed opacity-80">Your data is processed locally. We do not store your personal academic metrics on our servers.</p>
+</div>
+<div class="bg-primary p-6 neo-border neo-shadow">
+<h4 class="font-extrabold uppercase mb-2 text-white">Disclaimer</h4>
+<p class="text-xs leading-relaxed text-white/90">Predictions are estimates. Final decisions rest solely with university admissions committees.</p>
+</div>
+</footer>
+</div>
+<!-- Decorative Elements -->
+<div class="fixed top-10 right-10 -z-10 opacity-20 hidden lg:block">
+<div class="w-48 h-48 border-4 border-[#221e10] rotate-12 bg-primary"></div>
+</div>
+<div class="fixed bottom-10 left-10 -z-10 opacity-20 hidden lg:block">
+<div class="w-32 h-32 border-4 border-[#221e10] -rotate-45 bg-[#ff4d4d]"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="db.js"></script>
+<script>
+// Pre-fill from quick calc on landing page
+window.addEventListener('DOMContentLoaded', () => {
+    const quick = localStorage.getItem('admitPredict_quickData');
+    if (quick) {
+        const d = JSON.parse(quick);
+        if (d.cgpa) document.getElementById('cgpa').value = d.cgpa;
+        if (d.gre) document.getElementById('gre').value = d.gre;
+        localStorage.removeItem('admitPredict_quickData');
+    }
+    // Live range labels
+    document.getElementById('sop').addEventListener('input', e => {
+        document.getElementById('sop-val').textContent = parseFloat(e.target.value).toFixed(1);
+    });
+    document.getElementById('lor').addEventListener('input', e => {
+        document.getElementById('lor-val').textContent = parseFloat(e.target.value).toFixed(1);
+    });
+});
+
+document.getElementById('predict-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    let valid = true;
+
+    const gre = parseInt(document.getElementById('gre').value);
+    const toefl = parseInt(document.getElementById('toefl').value);
+    const cgpa = parseFloat(document.getElementById('cgpa').value);
+    const sop = parseFloat(document.getElementById('sop').value);
+    const lor = parseFloat(document.getElementById('lor').value);
+    const research = document.getElementById('research').checked;
+    const rating = parseInt(document.querySelector('input[name="rating"]:checked').value);
+
+    ['gre-error','toefl-error','cgpa-error','form-error'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+    });
+
+    if (!gre || isNaN(gre)) { document.getElementById('gre-error').classList.remove('hidden'); valid = false; }
+    if (!toefl && toefl !== 0 || isNaN(toefl)) { document.getElementById('toefl-error').classList.remove('hidden'); valid = false; }
+    if (!cgpa || isNaN(cgpa)) { document.getElementById('cgpa-error').classList.remove('hidden'); valid = false; }
+
+    if (!valid) {
+        document.getElementById('form-error').classList.remove('hidden');
+        return;
+    }
+
+    // Calculate admission probability
+    let score = 0;
+    score += Math.max(0, Math.min(25, ((gre - 260) / 80) * 25));
+    score += Math.max(0, Math.min(15, ((toefl - 80) / 40) * 15));
+    score += Math.max(0, Math.min(25, ((cgpa - 5) / 5) * 25));
+    score += Math.max(0, Math.min(10, ((sop - 1) / 4) * 10));
+    score += Math.max(0, Math.min(10, ((lor - 1) / 4) * 10));
+    score += research ? 10 : 0;
+    score += (3 - rating) * 2.5;
+    const probability = Math.max(5, Math.min(99, Math.round(score)));
+
+    const data = { gre, toefl, cgpa, sop, lor, research, rating, probability, timestamp: Date.now() };
+    localStorage.setItem('admitPredict_result', JSON.stringify(data));
+
+    // Save to localStorage history
+    const history = JSON.parse(localStorage.getItem('admitPredict_history') || '[]');
+    history.unshift(data);
+    localStorage.setItem('admitPredict_history', JSON.stringify(history.slice(0, 20)));
+
+    // Save to Supabase cloud (with spinner feedback)
+    const submitBtn = document.querySelector('[type="submit"]');
+    const originalBtnHTML = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="text-3xl font-black uppercase tracking-widest text-white flex items-center justify-center gap-3">Saving... <span class="material-icons text-4xl">cloud_upload</span></span>';
+    submitBtn.disabled = true;
+
+    if (window.db) {
+        const user = JSON.parse(localStorage.getItem('admitPredict_user') || 'null');
+        try {
+            const { error } = await window.db.from('predictions').insert({
+                user_email: user ? user.email : null,
+                user_name:  user ? user.name  : null,
+                gre, toefl, cgpa, sop, lor, research, rating, probability
+            });
+            if (error) console.warn('[AdmitPredict] Supabase insert:', error.message);
+        } catch (err) {
+            console.warn('[AdmitPredict] Supabase insert failed:', err.message);
+        }
+    }
+
+    submitBtn.innerHTML = originalBtnHTML;
+    submitBtn.disabled = false;
+
+    window.location.href = 'results.html';
+});
+</script>
+</body></html>

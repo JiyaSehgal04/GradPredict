@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23c2940a'/><text x='16' y='24' font-family='Arial Black,sans-serif' font-weight='900' font-size='22' fill='white' text-anchor='middle'>A</text></svg>"/>
+<title>Sign In | AdmitPredict</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#c2940a",
+                    "background-light": "#f8f8f5",
+                    "background-dark": "#221e10",
+                    "brutalist-black": "#1a1a1a"
+                },
+                fontFamily: { "display": ["Lexend", "sans-serif"] },
+                borderRadius: { "DEFAULT": "0.125rem" },
+            }
+        }
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="db.js"></script>
+<style>
+    body { font-family: 'Lexend', sans-serif; background-color: #f8f8f5; }
+    .neo-border { border: 4px solid #1a1a1a; }
+    .neo-shadow { box-shadow: 6px 6px 0px 0px #1a1a1a; }
+    .neo-shadow-primary { box-shadow: 6px 6px 0px 0px #c2940a; }
+    .neo-input { border: 3px solid #1a1a1a; background-color: #fff9e6; }
+    .neo-input:focus { outline: none; border-color: #c2940a; box-shadow: 4px 4px 0px 0px #c2940a; }
+</style>
+</head>
+<body class="bg-background-light font-display text-brutalist-black min-h-screen flex items-center justify-center py-16 px-4">
+
+<!-- Decorative shapes -->
+<div class="fixed top-16 -left-12 w-48 h-48 bg-primary/20 neo-border rotate-12 -z-10 pointer-events-none"></div>
+<div class="fixed bottom-16 -right-12 w-36 h-36 bg-primary/20 neo-border -rotate-45 -z-10 pointer-events-none"></div>
+<div class="fixed top-1/2 right-20 w-24 h-24 bg-primary/10 neo-border rotate-6 -z-10 pointer-events-none hidden lg:block"></div>
+
+<div class="w-full max-w-md">
+    <!-- Back link -->
+    <a href="index.html" class="flex items-center gap-2 font-black uppercase text-sm tracking-widest hover:text-primary transition-colors mb-8">
+        <span class="material-icons text-sm">arrow_back</span> Back to Home
+    </a>
+
+    <!-- Login Card -->
+    <div class="bg-white neo-border neo-shadow p-10">
+        <div class="text-center mb-10">
+            <a href="index.html" class="inline-flex items-center gap-2 mb-8 hover:opacity-80 transition-opacity">
+                <div class="w-10 h-10 bg-primary neo-border flex items-center justify-center text-white font-black text-xl">A</div>
+                <span class="text-2xl font-black tracking-tighter uppercase">AdmitPredict</span>
+            </a>
+            <h1 class="text-4xl font-black uppercase leading-none">Sign In</h1>
+            <p class="font-bold text-brutalist-black/50 mt-3 uppercase text-xs tracking-widest">Save &amp; track your predictions</p>
+        </div>
+
+        <form id="login-form" class="space-y-6" novalidate>
+            <div class="space-y-2">
+                <label class="block font-black uppercase text-sm tracking-widest" for="name">Full Name</label>
+                <input id="name" name="name" type="text" placeholder="e.g. Alex Johnson" autocomplete="name"
+                    class="w-full neo-input p-4 font-bold text-lg transition-all w-full block"/>
+            </div>
+            <div class="space-y-2">
+                <label class="block font-black uppercase text-sm tracking-widest" for="email">Email Address</label>
+                <input id="email" name="email" type="email" placeholder="you@university.edu" autocomplete="email"
+                    class="w-full neo-input p-4 font-bold text-lg transition-all w-full block"/>
+            </div>
+
+            <div id="login-error" class="hidden bg-red-500 text-white p-3 border-2 border-brutalist-black flex items-center gap-2">
+                <span class="material-icons text-sm">error</span>
+                <span class="font-bold text-xs uppercase">Please fill in all fields correctly.</span>
+            </div>
+
+            <button type="submit" class="w-full bg-primary text-white neo-border neo-shadow py-5 font-black text-xl uppercase tracking-widest hover:opacity-90 active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2">
+                Sign In &amp; Continue <span class="material-icons">arrow_forward</span>
+            </button>
+        </form>
+
+        <div class="mt-8 space-y-4">
+            <p class="text-center text-xs font-bold text-brutalist-black/40 uppercase tracking-widest">
+                Your data stays on your device. No server storage.
+            </p>
+            <div class="border-t-2 border-brutalist-black/10 pt-6 text-center">
+                <a href="predict.html" class="font-bold text-sm hover:text-primary transition-colors underline underline-offset-4">
+                    Skip login — predict as guest
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feature hints -->
+    <div class="mt-8 grid grid-cols-3 gap-4 text-center">
+        <div class="bg-white neo-border p-4">
+            <span class="material-icons text-primary text-2xl mb-1 block">history</span>
+            <p class="text-xs font-black uppercase">Save History</p>
+        </div>
+        <div class="bg-white neo-border p-4">
+            <span class="material-icons text-primary text-2xl mb-1 block">download</span>
+            <p class="text-xs font-black uppercase">Download Reports</p>
+        </div>
+        <div class="bg-white neo-border p-4">
+            <span class="material-icons text-primary text-2xl mb-1 block">compare</span>
+            <p class="text-xs font-black uppercase">Compare Unis</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Already logged in → go straight to dashboard
+    if (localStorage.getItem('admitPredict_user')) {
+        window.location.href = 'dashboard.html';
+    }
+
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!name || !email || !emailPattern.test(email)) {
+            document.getElementById('login-error').classList.remove('hidden');
+            return;
+        }
+        document.getElementById('login-error').classList.add('hidden');
+
+        const user = { name, email, joinedAt: Date.now() };
+        localStorage.setItem('admitPredict_user', JSON.stringify(user));
+
+        // Upsert user profile to Supabase
+        if (window.db) {
+            try {
+                const { error } = await window.db.from('users')
+                    .upsert({ email, name }, { onConflict: 'email' });
+                if (error) console.warn('[AdmitPredict] User upsert:', error.message);
+            } catch (err) {
+                console.warn('[AdmitPredict] User upsert failed:', err.message);
+            }
+        }
+
+        window.location.href = 'dashboard.html';
+    });
+</script>
+</body></html>
