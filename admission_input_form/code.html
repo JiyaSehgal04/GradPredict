@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admission Input Form - Neobrutalist Predictor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#c2940a",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#221e10",
+                        "card-bg": "#ffffff",
+                        "input-bg": "#fff9e6",
+                        "accent-red": "#ff4d4d"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderWidth: {
+                        "3": "3px",
+                        "4": "4px",
+                    },
+                    boxShadow: {
+                        "brutal": "8px 8px 0px 0px #221e10",
+                        "brutal-hover": "4px 4px 0px 0px #221e10",
+                        "brutal-primary": "6px 6px 0px 0px #c2940a",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: #f8f8f5;
+        }
+        .neo-border {
+            border: 4px solid #221e10;
+        }
+        .neo-shadow {
+            box-shadow: 8px 8px 0px 0px #221e10;
+        }
+        .neo-input:focus {
+            outline: none;
+            border-color: #c2940a;
+            box-shadow: 4px 4px 0px 0px #c2940a;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#221e10] dark:text-[#f8f8f5] min-h-screen py-12 px-4">
+<div class="max-w-3xl mx-auto">
+<!-- Header -->
+<header class="mb-10 text-center">
+<h1 class="text-5xl md:text-7xl font-extrabold uppercase tracking-tighter mb-4 bg-primary inline-block px-4 py-2 neo-border neo-shadow">
+                Predictor
+            </h1>
+<p class="text-xl font-bold mt-6 text-[#221e10]/80 dark:text-white/80">
+                ENTER YOUR STATS TO ESTIMATE YOUR GRADUATE ADMISSION CHANCES
+            </p>
+</header>
+<!-- Main Form Card -->
+<main class="bg-card-bg dark:bg-[#2d2816] neo-border neo-shadow p-8 md:p-12 mb-12">
+<form action="#" class="space-y-8" method="POST">
+<!-- Grid Section 1: GRE & TOEFL -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="block text-lg font-extrabold uppercase tracking-tight" for="gre">GRE Score (Max 340)</label>
+<input class="w-full neo-border bg-input-bg dark:bg-[#3d3620] p-4 text-xl font-bold neo-input transition-all" id="gre" max="340" min="0" name="gre" placeholder="e.g. 320" type="number"/>
+<!-- Error Example -->
+<div class="bg-accent-red text-white p-2 neo-border flex items-center gap-2 mt-2">
+<span class="material-icons text-sm">error</span>
+<span class="font-bold text-xs uppercase">Value must be 340 or less</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-lg font-extrabold uppercase tracking-tight" for="toefl">TOEFL Score (Max 120)</label>
+<input class="w-full neo-border bg-input-bg dark:bg-[#3d3620] p-4 text-xl font-bold neo-input transition-all" id="toefl" max="120" min="0" name="toefl" placeholder="e.g. 110" type="number"/>
+</div>
+</div>
+<!-- Grid Section 2: University Rating & CGPA -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="block text-lg font-extrabold uppercase tracking-tight">University Rating</label>
+<div class="flex gap-2">
+<label class="flex-1 cursor-pointer">
+<input class="hidden peer" name="rating" type="radio" value="1"/>
+<div class="bg-input-bg dark:bg-[#3d3620] neo-border p-3 text-center font-black peer-checked:bg-primary peer-checked:text-white transition-all">1</div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="hidden peer" name="rating" type="radio" value="2"/>
+<div class="bg-input-bg dark:bg-[#3d3620] neo-border p-3 text-center font-black peer-checked:bg-primary peer-checked:text-white transition-all">2</div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input checked="" class="hidden peer" name="rating" type="radio" value="3"/>
+<div class="bg-input-bg dark:bg-[#3d3620] neo-border p-3 text-center font-black peer-checked:bg-primary peer-checked:text-white transition-all">3</div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="hidden peer" name="rating" type="radio" value="4"/>
+<div class="bg-input-bg dark:bg-[#3d3620] neo-border p-3 text-center font-black peer-checked:bg-primary peer-checked:text-white transition-all">4</div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="hidden peer" name="rating" type="radio" value="5"/>
+<div class="bg-input-bg dark:bg-[#3d3620] neo-border p-3 text-center font-black peer-checked:bg-primary peer-checked:text-white transition-all">5</div>
+</label>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-lg font-extrabold uppercase tracking-tight" for="cgpa">CGPA (Scale of 10)</label>
+<input class="w-full neo-border bg-input-bg dark:bg-[#3d3620] p-4 text-xl font-bold neo-input transition-all" id="cgpa" max="10" min="0" name="cgpa" placeholder="e.g. 8.5" step="0.01" type="number"/>
+</div>
+</div>
+<!-- Grid Section 3: SOP & LOR -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="block text-lg font-extrabold uppercase tracking-tight" for="sop">SOP Strength (1-5)</label>
+<input class="w-full h-8 bg-input-bg dark:bg-[#3d3620] neo-border appearance-none cursor-pointer accent-primary" id="sop" max="5" min="1" name="sop" step="0.5" type="range"/>
+<div class="flex justify-between font-bold text-sm px-1">
+<span>1.0</span><span>2.0</span><span>3.0</span><span>4.0</span><span>5.0</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-lg font-extrabold uppercase tracking-tight" for="lor">LOR Strength (1-5)</label>
+<input class="w-full h-8 bg-input-bg dark:bg-[#3d3620] neo-border appearance-none cursor-pointer accent-primary" id="lor" max="5" min="1" name="lor" step="0.5" type="range"/>
+<div class="flex justify-between font-bold text-sm px-1">
+<span>1.0</span><span>2.0</span><span>3.0</span><span>4.0</span><span>5.0</span>
+</div>
+</div>
+</div>
+<!-- Research Toggle -->
+<div class="p-6 bg-primary/10 dark:bg-primary/5 neo-border">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="text-xl font-extrabold uppercase">Research Experience</h3>
+<p class="text-sm font-bold opacity-70 uppercase">Have you published any papers?</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-20 h-10 bg-[#ddd] neo-border peer-checked:bg-primary transition-colors flex items-center px-1">
+<div class="w-7 h-7 bg-white neo-border peer-checked:translate-x-10 transition-transform"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary py-6 neo-border neo-shadow hover:translate-y-1 hover:translate-x-1 hover:shadow-none transition-all duration-75" type="submit">
+<span class="text-3xl font-black uppercase tracking-widest text-white flex items-center justify-center gap-3">
+                        Predict Now <span class="material-icons text-4xl">trending_up</span>
+</span>
+</button>
+</form>
+</main>
+<!-- Informational Footer -->
+<footer class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-[#221e10] text-white p-6 neo-border neo-shadow">
+<h4 class="font-extrabold uppercase mb-2">How it works</h4>
+<p class="text-xs leading-relaxed opacity-80">Our engine uses historical admission data to calculate your probability of acceptance based on the parameters provided.</p>
+</div>
+<div class="bg-white dark:bg-[#2d2816] p-6 neo-border neo-shadow">
+<h4 class="font-extrabold uppercase mb-2">Confidential</h4>
+<p class="text-xs leading-relaxed opacity-80">Your data is processed locally. We do not store your personal academic metrics on our servers.</p>
+</div>
+<div class="bg-primary p-6 neo-border neo-shadow">
+<h4 class="font-extrabold uppercase mb-2 text-white">Disclaimer</h4>
+<p class="text-xs leading-relaxed text-white/90">Predictions are estimates. Final decisions rest solely with university admissions committees.</p>
+</div>
+</footer>
+</div>
+<!-- Decorative Elements -->
+<div class="fixed top-10 right-10 -z-10 opacity-20 hidden lg:block">
+<div class="w-48 h-48 border-4 border-[#221e10] rotate-12 bg-primary"></div>
+</div>
+<div class="fixed bottom-10 left-10 -z-10 opacity-20 hidden lg:block">
+<div class="w-32 h-32 border-4 border-[#221e10] -rotate-45 bg-[#ff4d4d]"></div>
+</div>
+</body></html>

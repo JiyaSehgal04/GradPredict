@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Prediction Dashboard | Graduate Admissions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#c2940a",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#221e10",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .brutalist-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+        .brutalist-shadow-primary {
+            box-shadow: 4px 4px 0px 0px #c2940a;
+        }
+        .chart-grid {
+            background-image: linear-gradient(#e5e7eb 1px, transparent 1px), linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex">
+<!-- Sidebar -->
+<aside class="w-64 border-r-4 border-primary bg-white dark:bg-background-dark hidden md:flex flex-col sticky top-0 h-screen">
+<div class="p-6 border-b-2 border-primary/20">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary flex items-center justify-center text-white font-bold rounded">P</div>
+<h1 class="text-xl font-bold tracking-tight">PREDICT.IO</h1>
+</div>
+</div>
+<nav class="flex-1 p-4 space-y-2">
+<a class="flex items-center gap-3 p-3 bg-primary text-white brutalist-shadow rounded transition-all" href="#">
+<span class="material-icons">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-slate-600 dark:text-slate-400 hover:bg-primary/10 rounded transition-all" href="#">
+<span class="material-icons">analytics</span>
+<span class="font-medium">New Prediction</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-slate-600 dark:text-slate-400 hover:bg-primary/10 rounded transition-all" href="#">
+<span class="material-icons">history</span>
+<span class="font-medium">Past History</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-slate-600 dark:text-slate-400 hover:bg-primary/10 rounded transition-all" href="#">
+<span class="material-icons">school</span>
+<span class="font-medium">Universities</span>
+</a>
+</nav>
+<div class="p-4 border-t-2 border-primary/20">
+<div class="p-4 bg-primary/10 rounded border border-primary/30">
+<p class="text-xs font-bold uppercase text-primary mb-1">Account Status</p>
+<p class="text-sm font-semibold">Premium Member</p>
+<div class="mt-2 w-full bg-primary/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-3/4"></div>
+</div>
+</div>
+<button class="mt-4 flex items-center gap-3 p-3 w-full text-slate-600 dark:text-slate-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-all">
+<span class="material-icons">logout</span>
+<span class="font-medium">Logout</span>
+</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto">
+<!-- Top Navigation -->
+<header class="bg-white dark:bg-background-dark border-b-2 border-primary/20 sticky top-0 z-10 px-8 py-4 flex items-center justify-between">
+<div>
+<h2 class="text-2xl font-bold">Welcome back, Alex!</h2>
+<p class="text-slate-500 text-sm">Review your admission probabilities for Fall 2024.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 border-2 border-slate-900 dark:border-primary rounded-lg hover:bg-primary/10">
+<span class="material-icons">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-700">
+<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary" data-alt="Close up portrait of a male student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyk2b0FIsUwgEs_vhj2khUvvyTONw629nT7wcln3yIWGvkwfUoWG-MyufFcvbiXctwXsW9jDFYxuwZ-zMpf1a3tFYrKpROalB7rrtPK5tftdmjRe8ZxCFchceEmlLWrQOWQr2N7MwooT4T-1uV1BMr58rrFluva6KAdOhcr4vvx9VC2Uo2D6dbuKbYA3VPzQvIoO2gwHNyP1f0H-qBSRQpFmg3jrrm81u3_YSh840KV0Yd7m53EFO5rd6NG4jWKKXdf64kY8E2i-03"/>
+<div class="hidden lg:block">
+<p class="text-sm font-bold">Alex Chen</p>
+<p class="text-xs text-slate-500">CS Graduate Track</p>
+</div>
+</div>
+</div>
+</header>
+<div class="p-8 max-w-7xl mx-auto space-y-8">
+<!-- Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-background-dark border-2 border-slate-900 dark:border-primary p-6 brutalist-shadow">
+<p class="text-xs font-bold uppercase text-slate-500 mb-1">Total Predictions</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold">24</span>
+<span class="text-sm text-green-600 font-bold">+3 this week</span>
+</div>
+</div>
+<div class="bg-white dark:bg-background-dark border-2 border-slate-900 dark:border-primary p-6 brutalist-shadow">
+<p class="text-xs font-bold uppercase text-slate-500 mb-1">Average GPA</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold">3.82</span>
+<span class="text-sm text-primary font-bold">Target: 3.90</span>
+</div>
+</div>
+<div class="bg-white dark:bg-background-dark border-2 border-slate-900 dark:border-primary p-6 brutalist-shadow">
+<p class="text-xs font-bold uppercase text-slate-500 mb-1">Top Target</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold">Stanford</span>
+<span class="text-xs font-bold bg-primary text-white px-2 py-0.5 rounded">REACH</span>
+</div>
+</div>
+<div class="bg-white dark:bg-background-dark border-2 border-primary p-6 brutalist-shadow-primary flex flex-col items-center justify-center text-center cursor-pointer hover:translate-y-1 hover:shadow-none transition-all">
+<span class="material-icons text-primary text-3xl mb-1">add_circle</span>
+<p class="font-bold text-slate-900 dark:text-slate-100">Run New Simulation</p>
+</div>
+</div>
+<!-- Visualization Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 bg-white dark:bg-background-dark border-2 border-slate-900 dark:border-primary p-8 brutalist-shadow">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-xl font-bold">GPA vs. Admission Chance</h3>
+<p class="text-sm text-slate-500">Scatter plot of your simulated scenarios</p>
+</div>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 text-xs font-bold"><span class="w-3 h-3 bg-primary rounded-full"></span> High Reach</span>
+<span class="flex items-center gap-1 text-xs font-bold"><span class="w-3 h-3 bg-slate-900 dark:bg-white rounded-full"></span> Safety</span>
+</div>
+</div>
+<div class="h-64 relative border-l-2 border-b-2 border-slate-900 dark:border-slate-500 chart-grid ml-8 mb-8">
+<!-- Simulated Scatter Plot -->
+<div class="absolute bottom-[20%] left-[10%] w-4 h-4 bg-slate-900 dark:bg-white border-2 border-white dark:border-slate-900 rounded-full brutalist-shadow"></div>
+<div class="absolute bottom-[35%] left-[30%] w-4 h-4 bg-slate-900 dark:bg-white border-2 border-white dark:border-slate-900 rounded-full brutalist-shadow"></div>
+<div class="absolute bottom-[55%] left-[55%] w-4 h-4 bg-primary border-2 border-white dark:border-slate-900 rounded-full brutalist-shadow"></div>
+<div class="absolute bottom-[75%] left-[70%] w-4 h-4 bg-primary border-2 border-white dark:border-slate-900 rounded-full brutalist-shadow"></div>
+<div class="absolute bottom-[90%] left-[85%] w-5 h-5 bg-primary border-2 border-white dark:border-slate-900 rounded-full brutalist-shadow scale-110"></div>
+<!-- Axis Labels -->
+<div class="absolute -left-10 bottom-0 top-0 flex flex-col justify-between text-[10px] font-bold py-2">
+<span>100%</span>
+<span>75%</span>
+<span>50%</span>
+<span>25%</span>
+<span>0%</span>
+</div>
+<div class="absolute left-0 right-0 -bottom-8 flex justify-between text-[10px] font-bold px-2">
+<span>GPA 2.0</span>
+<span>2.5</span>
+<span>3.0</span>
+<span>3.5</span>
+<span>4.0</span>
+</div>
+</div>
+</div>
+<div class="bg-slate-900 text-white p-8 brutalist-shadow-primary flex flex-col">
+<h3 class="text-xl font-bold mb-4">Admissions Insight</h3>
+<div class="space-y-6 flex-1">
+<div class="border-l-4 border-primary pl-4">
+<p class="text-sm font-bold text-primary mb-1">IMPROVEMENT TIP</p>
+<p class="text-sm leading-relaxed">Increasing your TOEFL score by just 5 points could boost your chances at Ivy League schools by 12%.</p>
+</div>
+<div class="border-l-4 border-primary pl-4">
+<p class="text-sm font-bold text-primary mb-1">TREND ANALYSIS</p>
+<p class="text-sm leading-relaxed">Your current profile matches 85% of successful applicants at University of Texas, Austin.</p>
+</div>
+<div class="border-l-4 border-primary pl-4">
+<p class="text-sm font-bold text-primary mb-1">DEADLINE ALERT</p>
+<p class="text-sm leading-relaxed">MIT Early Action deadlines close in 42 days. Start your SOP now.</p>
+</div>
+</div>
+<button class="mt-8 bg-primary text-white py-3 font-bold brutalist-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
+                        VIEW DETAILED REPORT
+                    </button>
+</div>
+</section>
+<!-- Predictions Grid -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-bold">Recent Predictions</h3>
+<button class="text-sm font-bold border-b-2 border-primary hover:text-primary transition-colors">View All History</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Prediction Card 1 -->
+<div class="bg-white dark:bg-background-dark border-4 border-primary p-6 relative group overflow-hidden">
+<div class="absolute top-0 right-0 bg-primary text-white px-3 py-1 text-xs font-bold">92% CHANCE</div>
+<div class="mb-4">
+<h4 class="text-lg font-bold">Georgia Institute of Technology</h4>
+<p class="text-xs text-slate-500">M.S. in Computer Science • Fall 2024</p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="bg-slate-50 dark:bg-slate-800 p-2 rounded border border-slate-200 dark:border-slate-700">
+<p class="text-[10px] font-bold text-slate-400 uppercase">GRE Score</p>
+<p class="text-sm font-bold">328 / 340</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800 p-2 rounded border border-slate-200 dark:border-slate-700">
+<p class="text-[10px] font-bold text-slate-400 uppercase">CGPA</p>
+<p class="text-sm font-bold">3.91 / 4.0</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-6">
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase">Strong Match</span>
+<button class="text-primary text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                Full Analysis <span class="material-icons text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Prediction Card 2 -->
+<div class="bg-white dark:bg-background-dark border-4 border-slate-900 dark:border-primary p-6 relative group overflow-hidden">
+<div class="absolute top-0 right-0 bg-slate-900 dark:bg-primary text-white px-3 py-1 text-xs font-bold">64% CHANCE</div>
+<div class="mb-4">
+<h4 class="text-lg font-bold">Carnegie Mellon University</h4>
+<p class="text-xs text-slate-500">M.S. in Software Engineering • Fall 2024</p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="bg-slate-50 dark:bg-slate-800 p-2 rounded border border-slate-200 dark:border-slate-700">
+<p class="text-[10px] font-bold text-slate-400 uppercase">GRE Score</p>
+<p class="text-sm font-bold">328 / 340</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800 p-2 rounded border border-slate-200 dark:border-slate-700">
+<p class="text-[10px] font-bold text-slate-400 uppercase">CGPA</p>
+<p class="text-sm font-bold">3.91 / 4.0</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-6">
+<span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-[10px] font-bold rounded uppercase">Target School</span>
+<button class="text-slate-900 dark:text-primary text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                Full Analysis <span class="material-icons text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Prediction Card 3 -->
+<div class="bg-white dark:bg-background-dark border-4 border-primary p-6 relative group overflow-hidden">
+<div class="absolute top-0 right-0 bg-primary text-white px-3 py-1 text-xs font-bold">28% CHANCE</div>
+<div class="mb-4">
+<h4 class="text-lg font-bold">Stanford University</h4>
+<p class="text-xs text-slate-500">PhD in Artificial Intelligence • Fall 2024</p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="bg-slate-50 dark:bg-slate-800 p-2 rounded border border-slate-200 dark:border-slate-700">
+<p class="text-[10px] font-bold text-slate-400 uppercase">GRE Score</p>
+<p class="text-sm font-bold">328 / 340</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800 p-2 rounded border border-slate-200 dark:border-slate-700">
+<p class="text-[10px] font-bold text-slate-400 uppercase">CGPA</p>
+<p class="text-sm font-bold">3.91 / 4.0</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-6">
+<span class="px-2 py-1 bg-red-100 text-red-700 text-[10px] font-bold rounded uppercase">Reach School</span>
+<button class="text-primary text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                Full Analysis <span class="material-icons text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Prediction Card 4 -->
+<div class="bg-white dark:bg-background-dark border-4 border-slate-900 dark:border-primary p-6 relative group overflow-hidden">
+<div class="absolute top-0 right-0 bg-slate-900 dark:bg-primary text-white px-3 py-1 text-xs font-bold">78% CHANCE</div>
+<div class="mb-4">
+<h4 class="text-lg font-bold">University of Washington</h4>
+<p class="text-xs text-slate-500">M.S. in Computer Science • Fall 2024</p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="bg-slate-50 dark:bg-slate-800 p-2 rounded border border-slate-200 dark:border-slate-700">
+<p class="text-[10px] font-bold text-slate-400 uppercase">GRE Score</p>
+<p class="text-sm font-bold">328 / 340</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800 p-2 rounded border border-slate-200 dark:border-slate-700">
+<p class="text-[10px] font-bold text-slate-400 uppercase">CGPA</p>
+<p class="text-sm font-bold">3.91 / 4.0</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-6">
+<span class="px-2 py-1 bg-blue-100 text-blue-700 text-[10px] font-bold rounded uppercase">Likely Match</span>
+<button class="text-slate-900 dark:text-primary text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                Full Analysis <span class="material-icons text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- New Action Card -->
+<div class="border-4 border-dashed border-slate-300 dark:border-slate-700 p-6 flex flex-col items-center justify-center min-h-[220px] group cursor-pointer hover:border-primary transition-colors">
+<div class="w-12 h-12 rounded-full border-2 border-slate-300 dark:border-slate-700 flex items-center justify-center mb-4 group-hover:border-primary group-hover:bg-primary/10 transition-colors">
+<span class="material-icons text-slate-400 group-hover:text-primary">add</span>
+</div>
+<p class="font-bold text-slate-400 group-hover:text-primary">Predict another University</p>
+</div>
+</div>
+</section>
+</div>
+<footer class="p-8 border-t-2 border-primary/20 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500 gap-4">
+<p>© 2024 PREDICT.IO - Academic Data Insights Platform</p>
+<div class="flex gap-6">
+<a class="hover:text-primary font-medium" href="#">Privacy Policy</a>
+<a class="hover:text-primary font-medium" href="#">Terms of Service</a>
+<a class="hover:text-primary font-medium" href="#">Support Center</a>
+</div>
+</footer>
+</main>
+<!-- Mobile Navigation (Bottom) -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t-2 border-primary px-6 py-2 flex justify-between items-center z-50">
+<button class="p-2 text-primary">
+<span class="material-icons">dashboard</span>
+</button>
+<button class="p-2 text-slate-400">
+<span class="material-icons">history</span>
+</button>
+<button class="w-12 h-12 bg-primary text-white rounded-full brutalist-shadow -mt-8 flex items-center justify-center">
+<span class="material-icons">add</span>
+</button>
+<button class="p-2 text-slate-400">
+<span class="material-icons">school</span>
+</button>
+<button class="p-2 text-slate-400">
+<span class="material-icons">person</span>
+</button>
+</div>
+</body></html>
