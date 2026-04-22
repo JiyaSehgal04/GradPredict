@@ -246,4 +246,5 @@ Open source under the [MIT License](LICENSE). Free to use, fork, and build upon.
 
 [![GitHub stars](https://img.shields.io/github/stars/JiyaSehgal04/GradPredict?style=social)](https://github.com/JiyaSehgal04/GradPredict/stargazers)
 
-</div>
+</div><img width="3420" height="1706" alt="screenshot-dashboard" src="https://github.com/user-attachments/assets/148740fa-2ba4-4465-85d2-9e717b5c97dc" />
+
