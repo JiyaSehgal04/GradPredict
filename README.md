@@ -65,6 +65,7 @@ Deployed on Vercel with full multi-page routing across the landing page, predict
 <img width="3420" height="1706" alt="screenshot-dashboard" src="https://github.com/user-attachments/assets/dd648570-1f6d-434a-8079-214eb9a17472" />
 
 
+
 The dashboard shows total predictions run, latest admission probability, best score achieved, and a full **AI Counselor** panel (powered by OpenAI) that breaks down your strengths, gaps to address, and a month-by-month action plan.
 
 ---
@@ -151,7 +152,7 @@ Step 3: Results + Persistence
 | **Backend / DB** | Supabase JS SDK v2 (PostgreSQL REST API) |
 | **AI Counselor** | OpenAI API |
 | **ML / Data Science** | Python, Jupyter Notebook, pandas, scikit-learn |
-| **Deployment** | Vercel |
+| **Deployment** | Vercel | Render |
 
 ---
 
