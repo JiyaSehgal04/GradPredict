@@ -4,7 +4,14 @@
       "main": false
     }
   },
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index" }
-  ]
+  "experimentalServices": {
+    "frontend": {
+      "routePrefix": "/",
+      "framework": "vite"
+    },
+    "backend": {
+      "entrypoint": "api/index.py",
+      "routePrefix": "/api"
+    }
+  }
 }
