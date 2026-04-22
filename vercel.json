@@ -3,5 +3,15 @@
     "deploymentEnabled": {
       "main": false
     }
+  },
+  "experimentalServices": {
+    "frontend": {
+      "routePrefix": "/",
+      "framework": "vite"
+    },
+    "backend": {
+      "entrypoint": "api/index.py",
+      "routePrefix": "/api"
+    }
   }
 }
