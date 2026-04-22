@@ -50,17 +50,20 @@ Deployed on Vercel with full multi-page routing across the landing page, predict
 ## Screenshots
 
 ### Landing Page
-![Landing Page](./screenshot-landing.png)
+<img width="3420" height="1970" alt="WhatsApp Image 2026-04-22 at 19 47 44" src="https://github.com/user-attachments/assets/d64929d4-ae69-4c97-8f35-6fec55d99648" />
+
 
 ---
 
 ### Predictor Form
-![Predictor Form](./screenshot-predictor.png)
+<img width="1470" height="1624" alt="screenshot-predictor" src="https://github.com/user-attachments/assets/36d66c55-3668-4abd-86c6-c66a32f0226f" />
+
 
 ---
 
 ### User Dashboard — AI Counselor
-![Dashboard](./screenshot-dashboard.png)
+<img width="3420" height="1706" alt="screenshot-dashboard" src="https://github.com/user-attachments/assets/dd648570-1f6d-434a-8079-214eb9a17472" />
+
 
 The dashboard shows total predictions run, latest admission probability, best score achieved, and a full **AI Counselor** panel (powered by OpenAI) that breaks down your strengths, gaps to address, and a month-by-month action plan.
 
@@ -245,6 +248,4 @@ Open source under the [MIT License](LICENSE). Free to use, fork, and build upon.
 **Built for the ambitious. Designed to be honest. Deployed for everyone.**
 
 [![GitHub stars](https://img.shields.io/github/stars/JiyaSehgal04/GradPredict?style=social)](https://github.com/JiyaSehgal04/GradPredict/stargazers)
-
-</div><img width="3420" height="1706" alt="screenshot-dashboard" src="https://github.com/user-attachments/assets/148740fa-2ba4-4465-85d2-9e717b5c97dc" />
 
