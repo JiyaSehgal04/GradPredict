@@ -4,7 +4,7 @@
 
 ### *Data-driven graduate admission forecasting for ambitious students*
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-AdmitPredict-c2940a?style=for-the-badge)](https://jiyasehgal04.github.io/GradPredict)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-AdmitPredict-c2940a?style=for-the-badge)](https://gradpredict.vercel.app)
 [![Jupyter Notebook](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=for-the-badge&logo=jupyter&logoColor=white)](./Graduate%20Admission%20Prediction.ipynb)
 [![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](.)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](.)
@@ -21,6 +21,7 @@
 
 - [Overview](#overview)
 - [Live Demo](#live-demo)
+- [Screenshots](#screenshots)
 - [How It Works](#how-it-works)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
@@ -34,15 +35,34 @@
 
 **GradPredict (AdmitPredict)** is a full-stack, ML-powered web application that predicts a student's probability of admission to graduate programs. Users input 7 key academic parameters and the app computes a weighted admission score using a custom scoring algorithm trained on real admission data.
 
-The project combines a **Jupyter Notebook ML pipeline** (EDA, model training, evaluation) with a polished **multi-page frontend** that lets users interact with predictions, track history, and manage a personal dashboard — backed by **Supabase** cloud storage.
+The project combines a **Jupyter Notebook ML pipeline** (EDA, model training, evaluation) with a polished **multi-page frontend** that lets users interact with predictions, track history, and manage a personal dashboard — backed by **Supabase** cloud storage and an **OpenAI-powered AI Counselor** for personalised feedback.
 
 ---
 
 ## Live Demo
 
-**[Try AdmitPredict Live](https://gradpredict.vercel.app)**
+**[Try AdmitPredict Live →](https://gradpredict.vercel.app)**
 
-Deployed via GitHub Pages with full multi-page routing across the landing page, predictor form, results view, and user dashboard.
+Deployed on Vercel with full multi-page routing across the landing page, predictor form, results view, and user dashboard.
+
+---
+
+## Screenshots
+
+### Landing Page
+![Landing Page](./screenshot-landing.png)
+
+---
+
+### Predictor Form
+![Predictor Form](./screenshot-predictor.png)
+
+---
+
+### User Dashboard — AI Counselor
+![Dashboard](./screenshot-dashboard.png)
+
+The dashboard shows total predictions run, latest admission probability, best score achieved, and a full **AI Counselor** panel (powered by OpenAI) that breaks down your strengths, gaps to address, and a month-by-month action plan.
 
 ---
 
@@ -72,6 +92,7 @@ Step 2: Weighted Scoring Algorithm
 Step 3: Results + Persistence
         ↓
   Probability % displayed · Saved to Supabase · Logged to local history
+  AI Counselor generates personalised assessment via OpenAI
 ```
 
 ---
@@ -84,7 +105,15 @@ Step 3: Results + Persistence
 - "Fast Calc" quick predictor on the landing page — pre-fills GPA & GRE and routes directly to results
 - Probability clamped to a realistic 5–99% range (no false certainties)
 
+### AI Counselor (OpenAI-powered)
+- Generates a personalised overall assessment based on your latest prediction
+- Highlights your **strengths** (e.g. GRE, TOEFL, research) and **gaps to address** (e.g. SOP, LOR)
+- Produces a timestamped **action plan** with month-by-month improvement targets
+- Risk classification: **Safe / Medium Risk / High Risk** based on probability band
+- Refreshable on demand from the dashboard
+
 ### Personal Dashboard
+- Summary cards: total predictions, latest probability, best score ever
 - Persistent prediction history (up to 20 entries stored locally)
 - Cloud sync via **Supabase** — predictions tied to authenticated user accounts
 - User session managed via localStorage with name/email context passed to all pages
@@ -117,8 +146,9 @@ Step 3: Results + Persistence
 | **Typography** | Google Fonts — Lexend (weights 300–800) |
 | **Icons** | Google Material Icons & Material Symbols Outlined |
 | **Backend / DB** | Supabase JS SDK v2 (PostgreSQL REST API) |
+| **AI Counselor** | OpenAI API |
 | **ML / Data Science** | Python, Jupyter Notebook, pandas, scikit-learn |
-| **Deployment** | GitHub Pages |
+| **Deployment** | Vercel |
 
 ---
 
@@ -130,7 +160,7 @@ GradPredict/
 ├── index.html                           # Landing page — hero, metrics, 3-step process, fast calc
 ├── predict.html                         # Admission input form — 7-parameter predictor UI
 ├── results.html                         # Prediction results display page
-├── dashboard.html                       # User prediction history dashboard
+├── dashboard.html                       # User dashboard — history, AI Counselor, stats
 ├── login.html                           # Returning user login
 ├── signin.html                          # New user registration
 │
