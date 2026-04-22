@@ -1,4 +1,4 @@
-const ML_API = 'http://127.0.0.1:5050'
+const ML_API = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:5050'
 
 export async function calcProb(data, ratingOverride) {
   const rating = ratingOverride ?? data.rating
