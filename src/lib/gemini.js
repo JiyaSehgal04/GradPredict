@@ -1,8 +1,8 @@
-const MODELS = ['gpt-4o-mini', 'gpt-3.5-turbo']
+const MODELS = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant']
 
 export async function fetchGeminiInsights(d) {
-  const key = import.meta.env.VITE_OPENAI_KEY
-  if (!key) throw new Error('OpenAI API key not configured (VITE_OPENAI_KEY missing).')
+  const key = import.meta.env.VITE_GROQ_API_KEY
+  if (!key) throw new Error('Groq API key not configured (VITE_GROQ_API_KEY missing).')
 
   const prompt = `You are an expert graduate admissions counselor. Analyse this student profile strictly.
 
@@ -33,7 +33,7 @@ Respond with valid JSON in exactly this shape (no markdown, no extra keys):
 
   for (const model of MODELS) {
     try {
-      const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
