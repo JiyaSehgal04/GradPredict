@@ -491,16 +491,7 @@ function clearHistory() {
 
 renderDashboard();
 
-// ── Gemini AI Counselor ───────────────────────────────────────────────────
-const GEMINI_KEY = 'YOUR_GEMINI_API_KEY_HERE';
-const GEMINI_MODELS = [
-    'gemini-2.0-flash',
-    'gemini-2.0-flash-lite',
-    'gemini-2.5-flash-preview-04-17',
-    'gemini-1.5-flash-latest',
-    'gemini-1.5-pro-latest',
-];
-const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/';
+// ── AI Counselor (Groq via /api/ai-insights) ─────────────────────────────
 
 function triggerDashAI() {
     const raw = localStorage.getItem('admitPredict_result');
@@ -527,50 +518,18 @@ async function fetchDashAI(d) {
     loadEl.classList.remove('hidden');
     retryBtn.classList.add('hidden');
 
-    const prompt = `You are an expert graduate admissions counselor. Analyse this student profile and return ONLY a valid JSON object — no markdown, no code fences.
-
-Student profile:
-- GRE: ${d.gre}/340
-- TOEFL: ${d.toefl}/120
-- CGPA: ${d.cgpa}/10
-- SOP strength: ${d.sop}/5
-- LOR strength: ${d.lor}/5
-- Research experience: ${d.research ? 'Yes' : 'No'}
-- Target university tier: ${d.rating}/5 (1=easiest, 5=elite)
-- Calculated admission probability: ${d.probability}%
-
-Return exactly this JSON:
-{
-  "overall": "2-3 sentence honest overall profile assessment",
-  "work_needed": "Low|Medium|High|Extensive",
-  "work_hint": "one short phrase explaining the effort level",
-  "strengths": ["strength 1","strength 2","strength 3"],
-  "gaps": [
-    {"area":"area name","issue":"what is lacking","fix":"specific action to take","time":"realistic timeline e.g. 3-6 months"}
-  ],
-  "roadmap": "3-4 sentence step-by-step action plan with rough timeline",
-  "verdict": "One motivating sentence summarising their realistic outlook"
-}`;
-
-    const body = JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.55, maxOutputTokens: 900 }
-    });
-
-    let lastErr = 'No models available.';
     let parsed = null;
-    for (const model of GEMINI_MODELS) {
-        const url = `${GEMINI_BASE}${model}:generateContent?key=${GEMINI_KEY}`;
-        try {
-            const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
-            const json = await res.json();
-            if (!res.ok) { lastErr = json.error?.message || `HTTP ${res.status}`; console.warn(`[Gemini] ${model}: ${lastErr}`); continue; }
-            const raw = json.candidates?.[0]?.content?.parts?.[0]?.text || '';
-            const cleaned = raw.replace(/^```json\s*/i,'').replace(/^```\s*/i,'').replace(/```\s*$/i,'').trim();
-            parsed = JSON.parse(cleaned);
-            break;
-        } catch (e) { lastErr = e.message; console.warn(`[Gemini] ${model}: ${e.message}`); }
-    }
+    let lastErr = 'Unknown error.';
+    try {
+        const res = await fetch('/api/ai-insights', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(d),
+        });
+        const json = await res.json();
+        if (!res.ok) { lastErr = json.error || `HTTP ${res.status}`; }
+        else { parsed = json; }
+    } catch (e) { lastErr = e.message; }
 
     if (!parsed) {
         loadEl.classList.add('hidden');

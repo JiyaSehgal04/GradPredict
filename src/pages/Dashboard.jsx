@@ -251,7 +251,7 @@ export default function Dashboard() {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold leading-none">AI Counselor</h3>
-                      <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">Powered by OpenAI · Based on your latest prediction</p>
+                      <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">Powered by Groq · Based on your latest prediction</p>
                     </div>
                   </div>
                   {hasLatest && (
@@ -427,86 +427,138 @@ export default function Dashboard() {
                 )}
               </section>
 
-              {/* History cards */}
+              {/* History list */}
               <section>
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-4">
                   <div>
                     <h3 className="text-2xl font-bold">Saved Predictions</h3>
                     <p className="text-sm text-slate-500">
                       {history.length > 0 ? `${history.length} prediction${history.length !== 1 ? 's' : ''} saved` : 'No predictions yet'}
                     </p>
                   </div>
-                  <button onClick={clearHistory} className="text-sm font-bold border-b-2 border-red-400 text-red-500 hover:text-red-700 transition-colors">Clear All</button>
+                  <div className="flex items-center gap-4">
+                    <Link to="/predict" className="bg-primary text-white border-2 border-slate-900 px-4 py-2 font-bold uppercase text-sm brutalist-shadow hover:opacity-90 transition-all">
+                      + New
+                    </Link>
+                    {history.length > 0 && (
+                      <button onClick={clearHistory} className="text-sm font-bold border-b-2 border-red-400 text-red-500 hover:text-red-700 transition-colors">
+                        Clear All
+                      </button>
+                    )}
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {history.length === 0 ? (
-                    <div className="border-4 border-dashed border-slate-300 p-6 flex flex-col items-center justify-center min-h-[200px] col-span-3">
-                      <span className="material-icons text-slate-300 text-4xl mb-4">inbox</span>
-                      <p className="font-bold text-slate-400 text-center">No predictions yet.<br /><Link to="/predict" className="text-primary underline">Run your first prediction</Link> to see results here.</p>
+                {history.length === 0 ? (
+                  <div className="border-4 border-dashed border-slate-300 p-10 flex flex-col items-center justify-center min-h-[200px]">
+                    <span className="material-icons text-slate-300 text-4xl mb-4">inbox</span>
+                    <p className="font-bold text-slate-400 text-center">
+                      No predictions yet.<br />
+                      <Link to="/predict" className="text-primary underline">Run your first prediction</Link> to see results here.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="border-2 border-slate-900 brutalist-shadow overflow-hidden">
+                    {/* Column header */}
+                    <div className="grid grid-cols-[3rem_1fr_5rem_5rem_5rem_5rem_4rem_5rem_6rem] bg-slate-900 text-white px-4 py-3 text-[10px] font-extrabold uppercase tracking-widest sticky top-0 z-10 hidden md:grid">
+                      <div>#</div>
+                      <div>Status</div>
+                      <div>Prob.</div>
+                      <div>GRE</div>
+                      <div>CGPA</div>
+                      <div>TOEFL</div>
+                      <div>Res.</div>
+                      <div>Tier</div>
+                      <div>When</div>
                     </div>
-                  ) : (
-                    <>
+
+                    {/* Scrollable rows */}
+                    <div className="max-h-[480px] overflow-y-auto divide-y divide-slate-100">
                       {history.map((item, i) => {
                         const risk = getRiskStyle(item.probability)
-                        const borderColor = item.probability >= 75 ? 'border-primary' : 'border-slate-900'
-                        const barColor = item.probability >= 75 ? 'bg-green-500' : item.probability >= 50 ? 'bg-yellow-500' : 'bg-red-500'
-                        const iconColor = item.probability >= 75 ? 'text-green-600' : item.probability >= 50 ? 'text-yellow-500' : 'text-red-500'
+                        const barColor = item.probability >= 75 ? 'bg-green-500' : item.probability >= 50 ? 'bg-yellow-400' : 'bg-red-500'
+                        const probColor = item.probability >= 75 ? 'text-green-700' : item.probability >= 50 ? 'text-yellow-600' : 'text-red-600'
                         return (
-                          <div key={i} className={`bg-white border-4 ${borderColor} p-6 relative group overflow-hidden`}>
-                            <div className="absolute top-0 right-0 bg-primary text-white px-3 py-1 text-xs font-bold">{item.probability}%</div>
-                            <div className="mb-4 mt-2">
-                              <div className="flex items-center gap-2 mb-1">
-                                <span className={`material-icons text-sm ${iconColor}`}>
-                                  {item.probability >= 75 ? 'shield' : item.probability >= 50 ? 'warning' : 'cancel'}
-                                </span>
-                                <span className={`px-2 py-0.5 ${risk.badge} text-[10px] font-extrabold uppercase`}>{risk.label}</span>
+                          <div
+                            key={i}
+                            className="group bg-white hover:bg-slate-50 transition-colors"
+                          >
+                            {/* Desktop row */}
+                            <div className="hidden md:grid grid-cols-[3rem_1fr_5rem_5rem_5rem_5rem_4rem_5rem_6rem] items-center px-4 py-4 gap-1">
+                              <span className="text-xs font-bold text-slate-400">#{history.length - i}</span>
+
+                              <div className="flex items-center gap-2 min-w-0">
+                                <span className={`px-2 py-0.5 text-[10px] font-extrabold uppercase shrink-0 ${risk.badge}`}>{risk.label}</span>
+                                {item.fromCloud && (
+                                  <span className="material-icons text-xs text-primary shrink-0" title="Synced from cloud">cloud_done</span>
+                                )}
                               </div>
-                              <div className="flex items-center gap-2">
-                                <h4 className="text-lg font-bold">Prediction #{history.length - i}</h4>
-                                {item.fromCloud && <span className="material-icons text-sm text-primary" title="Synced from cloud">cloud_done</span>}
-                              </div>
-                              <p className="text-xs text-slate-500">GRE {item.gre} · CGPA {item.cgpa} · Uni Tier {item.rating} · {timeAgo(item.timestamp)}</p>
-                            </div>
-                            <div className="grid grid-cols-2 gap-3 mb-4">
-                              {[
-                                { label: 'GRE',      value: `${item.gre} / 340` },
-                                { label: 'CGPA',     value: `${item.cgpa} / 10` },
-                                { label: 'TOEFL',    value: `${item.toefl} / 120` },
-                                { label: 'Research', value: item.research ? 'Yes' : 'No' },
-                              ].map(m => (
-                                <div key={m.label} className="bg-slate-50 p-2 border border-slate-200">
-                                  <p className="text-[10px] font-bold text-slate-400 uppercase">{m.label}</p>
-                                  <p className="text-sm font-bold">{m.value}</p>
+
+                              <div className="flex flex-col gap-1">
+                                <span className={`text-sm font-extrabold ${probColor}`}>{item.probability}%</span>
+                                <div className="w-full h-1.5 bg-slate-100 overflow-hidden rounded-sm">
+                                  <div className={`h-full ${barColor} rounded-sm`} style={{ width: `${item.probability}%` }} />
                                 </div>
-                              ))}
-                            </div>
-                            <div className="mb-4">
-                              <div className="flex justify-between text-xs font-bold mb-1">
-                                <span className="uppercase text-slate-500">Admission Probability</span>
-                                <span>{item.probability}%</span>
                               </div>
-                              <div className="w-full h-2 bg-slate-100 border border-slate-300 overflow-hidden">
-                                <div className={`h-full ${barColor}`} style={{ width: `${item.probability}%` }} />
+
+                              <span className="text-sm font-bold">{item.gre}</span>
+                              <span className="text-sm font-bold">{item.cgpa}</span>
+                              <span className="text-sm font-bold">{item.toefl}</span>
+                              <span className="text-sm font-bold">{item.research ? 'Yes' : 'No'}</span>
+                              <span className="text-sm font-bold">{item.rating}/5</span>
+
+                              <div className="flex items-center justify-between">
+                                <span className="text-xs text-slate-400 font-medium">{timeAgo(item.timestamp)}</span>
+                                <Link to="/results" className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 text-primary" title="Full report">
+                                  <span className="material-icons text-base">open_in_new</span>
+                                </Link>
                               </div>
                             </div>
-                            <div className="flex items-center justify-between mt-2">
-                              <Link to="/results" className="text-primary text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
-                                Full Report <span className="material-icons text-sm">arrow_forward</span>
-                              </Link>
+
+                            {/* Mobile card (shown on small screens) */}
+                            <div className="md:hidden p-4">
+                              <div className="flex items-center justify-between mb-3">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs font-bold text-slate-400">#{history.length - i}</span>
+                                  <span className={`px-2 py-0.5 text-[10px] font-extrabold uppercase ${risk.badge}`}>{risk.label}</span>
+                                  {item.fromCloud && <span className="material-icons text-xs text-primary">cloud_done</span>}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <span className={`text-lg font-extrabold ${probColor}`}>{item.probability}%</span>
+                                  <Link to="/results" className="text-primary"><span className="material-icons text-base">open_in_new</span></Link>
+                                </div>
+                              </div>
+                              <div className="w-full h-1.5 bg-slate-100 overflow-hidden rounded-sm mb-3">
+                                <div className={`h-full ${barColor} rounded-sm`} style={{ width: `${item.probability}%` }} />
+                              </div>
+                              <div className="grid grid-cols-4 gap-2 text-center">
+                                {[
+                                  { label: 'GRE',  value: item.gre },
+                                  { label: 'CGPA', value: item.cgpa },
+                                  { label: 'TOEFL',value: item.toefl },
+                                  { label: 'Tier', value: `${item.rating}/5` },
+                                ].map(m => (
+                                  <div key={m.label} className="bg-slate-50 border border-slate-200 p-2 rounded">
+                                    <p className="text-[9px] font-bold text-slate-400 uppercase">{m.label}</p>
+                                    <p className="text-sm font-bold">{m.value}</p>
+                                  </div>
+                                ))}
+                              </div>
+                              <p className="text-xs text-slate-400 mt-2 text-right">{timeAgo(item.timestamp)}</p>
                             </div>
                           </div>
                         )
                       })}
-                      <Link to="/predict" className="border-4 border-dashed border-slate-300 p-6 flex flex-col items-center justify-center min-h-[220px] group cursor-pointer hover:border-primary transition-colors">
-                        <div className="w-12 h-12 rounded-full border-2 border-slate-300 flex items-center justify-center mb-4 group-hover:border-primary group-hover:bg-primary/10 transition-colors">
-                          <span className="material-icons text-slate-400 group-hover:text-primary">add</span>
-                        </div>
-                        <p className="font-bold text-slate-400 group-hover:text-primary">Run new prediction</p>
+                    </div>
+
+                    {/* Footer count */}
+                    <div className="bg-slate-50 border-t border-slate-200 px-4 py-2 flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-400 uppercase">{history.length} prediction{history.length !== 1 ? 's' : ''}</span>
+                      <Link to="/predict" className="text-xs font-bold text-primary flex items-center gap-1 hover:opacity-70 transition-opacity">
+                        <span className="material-icons text-sm">add</span> New prediction
                       </Link>
-                    </>
-                  )}
-                </div>
+                    </div>
+                  </div>
+                )}
               </section>
             </>
           )}

@@ -377,7 +377,7 @@ export default function Results() {
             </div>
             <div>
               <h2 className="text-3xl font-extrabold uppercase leading-none">AI Counselor Insights</h2>
-              <p className="text-xs font-bold text-zinc-500 uppercase tracking-widest mt-0.5">Personalised analysis · Powered by OpenAI</p>
+              <p className="text-xs font-bold text-zinc-500 uppercase tracking-widest mt-0.5">Personalised analysis · Powered by Groq</p>
             </div>
             {aiError && (
               <button onClick={() => loadAI(data)} className="ml-auto flex items-center gap-1 border-black-thick px-4 py-2 font-extrabold uppercase text-sm neobrutal-shadow-sm bg-white hover:bg-primary hover:text-white transition-colors">
@@ -390,7 +390,7 @@ export default function Results() {
             <div className="bg-zinc-900 text-white border-black-thick p-10 neobrutal-shadow text-center">
               <div className="inline-flex flex-col items-center gap-4">
                 <span className="material-icons text-primary text-5xl spin-slow">autorenew</span>
-                <p className="font-extrabold uppercase tracking-widest text-sm text-white/60">Analysing your profile with Gemini…</p>
+                <p className="font-extrabold uppercase tracking-widest text-sm text-white/60">Analysing your profile with Groq…</p>
               </div>
             </div>
           )}
@@ -398,7 +398,7 @@ export default function Results() {
           {aiError && !aiLoading && (
             <div className="bg-red-50 border-black-thick p-8 neobrutal-shadow-sm text-center">
               <span className="material-icons text-red-500 text-4xl mb-3 block">cloud_off</span>
-              <p className="font-extrabold uppercase text-red-600 mb-2">Could not reach Gemini</p>
+              <p className="font-extrabold uppercase text-red-600 mb-2">Could not reach Groq</p>
               <p className="text-sm text-red-400 font-medium">{aiError}</p>
             </div>
           )}
