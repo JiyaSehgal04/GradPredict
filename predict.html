@@ -173,6 +173,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="db.js"></script>
 <script>
+// Wake up Render backend while user fills the form
+fetch('https://gradpredict.onrender.com/health').catch(() => {});
+
 // Pre-fill from quick calc on landing page
 window.addEventListener('DOMContentLoaded', () => {
     const quick = localStorage.getItem('admitPredict_quickData');
@@ -216,16 +219,37 @@ document.getElementById('predict-form').addEventListener('submit', async functio
         return;
     }
 
-    // Calculate admission probability
-    let score = 0;
-    score += Math.max(0, Math.min(25, ((gre - 260) / 80) * 25));
-    score += Math.max(0, Math.min(15, ((toefl - 80) / 40) * 15));
-    score += Math.max(0, Math.min(25, ((cgpa - 5) / 5) * 25));
-    score += Math.max(0, Math.min(10, ((sop - 1) / 4) * 10));
-    score += Math.max(0, Math.min(10, ((lor - 1) / 4) * 10));
-    score += research ? 10 : 0;
-    score += (3 - rating) * 2.5;
-    const probability = Math.max(5, Math.min(99, Math.round(score)));
+    const submitBtn = document.querySelector('[type="submit"]');
+    const originalBtnHTML = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="text-3xl font-black uppercase tracking-widest text-white flex items-center justify-center gap-3">Predicting... <span class="material-icons text-4xl">hourglass_top</span></span>';
+    submitBtn.disabled = true;
+
+    // Try ML backend with 5s timeout, fall back to formula
+    let probability;
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        const resp = await fetch('https://gradpredict.onrender.com/predict', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ gre, toefl, rating, sop, lor, gpa: cgpa, research: research ? 1 : 0 }),
+            signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        if (!resp.ok) throw new Error(`API error ${resp.status}`);
+        const result = await resp.json();
+        probability = Math.round(result.probability);
+    } catch {
+        let score = 0;
+        score += Math.max(0, Math.min(25, ((gre - 260) / 80) * 25));
+        score += Math.max(0, Math.min(15, ((toefl - 80) / 40) * 15));
+        score += Math.max(0, Math.min(25, ((cgpa - 5) / 5) * 25));
+        score += Math.max(0, Math.min(10, ((sop - 1) / 4) * 10));
+        score += Math.max(0, Math.min(10, ((lor - 1) / 4) * 10));
+        score += research ? 10 : 0;
+        score += (3 - rating) * 2.5;
+        probability = Math.max(5, Math.min(99, Math.round(score)));
+    }
 
     const data = { gre, toefl, cgpa, sop, lor, research, rating, probability, timestamp: Date.now() };
     localStorage.setItem('admitPredict_result', JSON.stringify(data));
@@ -235,24 +259,18 @@ document.getElementById('predict-form').addEventListener('submit', async functio
     history.unshift(data);
     localStorage.setItem('admitPredict_history', JSON.stringify(history.slice(0, 20)));
 
-    // Save to Supabase cloud (with spinner feedback)
-    const submitBtn = document.querySelector('[type="submit"]');
-    const originalBtnHTML = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<span class="text-3xl font-black uppercase tracking-widest text-white flex items-center justify-center gap-3">Saving... <span class="material-icons text-4xl">cloud_upload</span></span>';
-    submitBtn.disabled = true;
-
+    // Save to Supabase in the background (non-blocking)
     if (window.db) {
         const user = JSON.parse(localStorage.getItem('admitPredict_user') || 'null');
-        try {
-            const { error } = await window.db.from('predictions').insert({
-                user_email: user ? user.email : null,
-                user_name:  user ? user.name  : null,
-                gre, toefl, cgpa, sop, lor, research, rating, probability
-            });
+        window.db.from('predictions').insert({
+            user_email: user ? user.email : null,
+            user_name:  user ? user.name  : null,
+            gre, toefl, cgpa, sop, lor, research, rating, probability
+        }).then(({ error }) => {
             if (error) console.warn('[AdmitPredict] Supabase insert:', error.message);
-        } catch (err) {
+        }).catch(err => {
             console.warn('[AdmitPredict] Supabase insert failed:', err.message);
-        }
+        });
     }
 
     submitBtn.innerHTML = originalBtnHTML;
